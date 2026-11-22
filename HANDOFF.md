@@ -16,6 +16,8 @@ buildable repo.
 
 Run locally: `python3 -m http.server 8000` → http://localhost:8000
 
+Hosting: GitHub Pages, Deploy from a branch, folder `/ (root)`. Pushing to that branch republishes the site.
+
 ## Differences between the design source and `index.html`
 
 Everything visible is unchanged. Only these were done to make it standalone:
