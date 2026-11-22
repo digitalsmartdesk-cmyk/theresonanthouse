@@ -9,16 +9,14 @@ buildable repo.
 
 | Path | What it is |
 |---|---|
-| `site/index.html` | **Start here.** Production-ready static page: plain HTML + inline CSS, ~15 lines of vanilla JS, no build step. Visually identical to the design. |
-| `site/uploads/Resonant House Luxury Logo.png` | The logo used in the hero (1536×1024 PNG, 1.5 MB). |
-| `site/uploads/a_clean_professional_brand_identity_logo_lockup_b.png` | Alternate logo lockup. **Not used on the page.** |
-| `design-source/Resonant House.dc.html` | Original Claude Design source (`.dc.html` format, needs `support.js` and the `uploads/` images from `site/` to render in the design editor). Reference only — do not edit; edit `site/index.html`. |
-| `design-source/compat.json`, `support.js` | Design-editor runtime/metadata. Ignore for production. |
+| `index.html` | **Start here.** Production-ready static page: plain HTML + inline CSS, ~15 lines of vanilla JS, no build step. Visually identical to the design. |
+| `uploads/Resonant House Luxury Logo.png` | The logo used in the hero (1536×1024 PNG, 1.5 MB). |
+| `uploads/a_clean_professional_brand_identity_logo_lockup_b.png` | Alternate logo lockup. **Not used on the page.** |
 | `CLAUDE.md` | Working rules for Claude Code in this repo. |
 
-Run locally: `cd site && python3 -m http.server 8000` → http://localhost:8000
+Run locally: `python3 -m http.server 8000` → http://localhost:8000
 
-## Differences between the design source and `site/index.html`
+## Differences between the design source and `index.html`
 
 Everything visible is unchanged. Only these were done to make it standalone:
 1. Removed the design-editor wrapper (`<x-dc>`, `<helmet>`, `support.js`).
@@ -62,7 +60,7 @@ These are marked `⚠ PLACEHOLDER` in the HTML comments:
 2. **Press kit** (`#press-kit`):
    - Heading reads literally `[Book One Title] — Press Kit` — needs the real title.
    - A visible italic note ("Placeholder — update the book title above and the download link below…") is rendered to visitors — **delete before launch**.
-   - "Download Press Kit" is `href="#"` — needs the real file/URL (host the PDF/zip in the repo, e.g. `site/press/`, or a link).
+   - "Download Press Kit" is `href="#"` — needs the real file/URL (host the PDF/zip in the repo, e.g. `press/`, or a link).
    - Its `aria-label` says "(placeholder link)" — remove that suffix when the link is real.
 3. **Email**: the site uses `theresonanthouse@gmail.com` as a stand-in. The contact section shows "Domain email coming soon." beneath it — swap to the domain address when ready and remove that line. The address appears in two `mailto:` links (contact section, footer) and once in the form handler's JS.
 4. **Contact form** has no backend: submit just opens the visitor's mail client with a prefilled `mailto:`. Fine for launch; consider Formspree/Netlify Forms/a serverless function if they want real submissions. `novalidate` is set and there is no inline validation or success state.
@@ -74,7 +72,7 @@ These are marked `⚠ PLACEHOLDER` in the HTML comments:
 - **Tagline inconsistency**: nav says "Strategic Communications & PR", footer and logo alt say "…& Public Relations". Pick one.
 - **Meta/social**: add `og:title`, `og:description`, `og:image`, favicon (derive from the logo's mark), canonical URL once the domain exists.
 - **Accessibility**: the design already uses landmarks, labelled inputs, `focus-visible` ring, `aria-hidden` on decorative SVG. Still to check: low-alpha text contrast (e.g. `rgba(250,246,238,0.28)` footer small print, `rgba(13,22,29,0.38)` "Domain email coming soon", 9px labels) against WCAG AA, and `prefers-reduced-motion` (the `.fi` fade-up has no reduced-motion fallback; `.fi` starts at `opacity:0`, so without JS the content is hidden — add a `<noscript>` rule or default to visible).
-- **Deployment**: pure static — Netlify, Vercel, Cloudflare Pages, GitHub Pages all work with `site/` as the publish directory.
+- **Deployment**: pure static — Netlify, Vercel, Cloudflare Pages, GitHub Pages all work with the repo root as the publish directory.
 
 ## Content notes (don't change without owner sign-off)
 
